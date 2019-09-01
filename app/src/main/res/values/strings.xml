@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">AppStreet_App</string>
+    <string name="username">UserName</string>
+    <string name="name">Name</string>
+    <string name="usertype">User Type</string>
+    <string name="userlink">User Link</string>
+    <string name="reponame">Name</string>
+    <string name="repodescription">Description</string>
+    <string name="repoLink">Repo Link</string>
+    <string name="user_description">User Description</string>
+    <string name="repository_details">Repository Details</string>
+    <string name="error_msg">An Error Occurred While Loading Data!</string>
 </resources>
