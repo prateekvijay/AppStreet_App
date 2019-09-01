@@ -1,6 +1,7 @@
 package com.example.android.appstreet_app.ui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -78,8 +79,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements I
     }
 
     @Override
-    public void onItemClick(User newsEntity) {
-
+    public void onItemClick(User user) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("SELECTED_USER",user);
+        Intent intent = new Intent(this,DetailViewActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     @Override

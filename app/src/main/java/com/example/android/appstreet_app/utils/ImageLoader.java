@@ -31,12 +31,19 @@ public class ImageLoader {
     private Map<ImageView, String> imageViews = Collections.synchronizedMap(new WeakHashMap<ImageView, String>());
     private ExecutorService executorService;
     private  final int stub_id = R.drawable.ic_launcher;
-
+    private static ImageLoader imageLoader = null;
     @Inject
     Context context;
-    public ImageLoader() {
+    private ImageLoader() {
         fileCache = new FileCache(context);
         executorService = Executors.newFixedThreadPool(5);
+    }
+
+    public static ImageLoader getInstance(){
+        if(imageLoader == null){
+            imageLoader = new ImageLoader();
+        }
+        return imageLoader;
     }
 
     public void displayImage(String url, ImageView imageView) {

@@ -22,7 +22,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
 
     public RepoAdapter(List<User> users) {
         this.users = users;
-        imageLoader = new ImageLoader();
+        imageLoader = ImageLoader.getInstance();
     }
 
     public void addListener(IItemClick itemClick) {
@@ -56,6 +56,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
         final User user = users.get(position);
         viewHolder.bind(user);
         imageLoader.displayImage(user.getAvatar(), viewHolder.binding.itemUserImage);
+        viewHolder.binding.setItemClickListener(click -> listener.onItemClick(user));
     }
 
     @Override
