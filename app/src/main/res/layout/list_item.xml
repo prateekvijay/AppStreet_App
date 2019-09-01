@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -14,7 +15,6 @@
     </data>
 
 <androidx.cardview.widget.CardView
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -22,68 +22,106 @@
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="@{itemClickListener}"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/itemUserImage"
+            android:id="@+id/imageView"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            />
-
-
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:id="@+id/itemRepoImage"
-            android:scaleType="fitXY"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/ic_launcher"
-            android:contentDescription="@string/app_name"
-            android:layout_marginEnd="5dp" />
-
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_launcher" />
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="0.6"
+            android:id="@+id/item_repo_name_view"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/itemRepoName"
-            android:gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+
+            android:text="@string/reponame"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/item_repo_name_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
             android:text="@{user.repo.name}"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="18sp" />
-
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="0.4"
+            android:id="@+id/item_user_name_view"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/itemRepoUserName"
-            android:layout_marginLeft="8dp"
-            android:gravity="start"
-            android:layout_marginEnd="8dp"
-            android:text="@{user.username}"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="18sp"
-            android:layout_marginStart="2dp"
-            android:layout_marginRight="8dp" />
-    </LinearLayout>
-    </LinearLayout>
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:text="@string/username"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_repo_name_value" />
+
+        <TextView
+            android:id="@+id/item_user_name_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@{user.name}"
+            android:textSize="16sp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/item_repo_name_value" />
+
+        <TextView
+            android:id="@+id/more_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/rectangle_background"
+            android:onClick="@{itemClickListener}"
+            android:padding="5dp"
+            android:text="@string/more_Details"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:layout_marginBottom="15dp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_user_name_value" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
 </layout>

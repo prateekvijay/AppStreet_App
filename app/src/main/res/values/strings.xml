@@ -4,7 +4,7 @@
     <string name="name">Name</string>
     <string name="usertype">User Type</string>
     <string name="userlink">User Link</string>
-    <string name="reponame">Name</string>
+    <string name="reponame">Repo Name</string>
     <string name="repodescription">Description</string>
     <string name="repoLink">Repo Link</string>
     <string name="user_description">User Description</string>
@@ -12,4 +12,5 @@
     <string name="error_msg">An Error Occurred While Loading Data!</string>
     <string name="cancel">Cancel</string>
     <string name="ok">Ok</string>
+    <string name="more_Details">More details >></string>
 </resources>

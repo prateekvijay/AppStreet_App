@@ -55,7 +55,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         final User user = users.get(position);
         viewHolder.bind(user);
-        imageLoader.displayImage(user.getAvatar(), viewHolder.binding.itemUserImage);
+        imageLoader.displayImage(user.getAvatar(), viewHolder.binding.imageView);
         viewHolder.binding.setItemClickListener(click -> listener.onItemClick(user));
     }
 

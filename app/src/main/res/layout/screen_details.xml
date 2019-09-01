@@ -138,6 +138,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/userlink"
+                    android:layout_marginBottom="15dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/user_type_view" />
 
@@ -150,6 +151,7 @@
                     android:layout_marginTop="16dp"
                     android:text="@{user.url}"
                     android:autoLink="web"
+                    android:layout_marginBottom="15dp"
                     app:layout_constrainedWidth="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -248,6 +250,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/repoLink"
+                    android:layout_marginBottom="15dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/repo_descp_value" />
 
@@ -263,6 +266,7 @@
                     android:linksClickable="true"
                     android:text="@{user.repo.url}"
                     app:layout_constrainedWidth="true"
+                    android:layout_marginBottom="15dp"
                     app:layout_constraintBaseline_toBaselineOf="@id/repo_link_view"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"

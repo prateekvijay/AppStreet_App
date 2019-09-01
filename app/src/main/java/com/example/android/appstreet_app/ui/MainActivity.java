@@ -129,6 +129,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements I
         Intent intent = new Intent(this, DetailViewActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
+        overridePendingTransition(R.anim.enter, R.anim.exit);
     }
 
     @Override
