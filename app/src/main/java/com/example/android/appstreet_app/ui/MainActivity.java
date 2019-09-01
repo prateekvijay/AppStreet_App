@@ -1,10 +1,15 @@
 package com.example.android.appstreet_app.ui;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -35,7 +40,46 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements I
         newsViewModel = ViewModelProviders.of(this, newsViewModelFactory).get(RepoViewModel.class);
         initNewsDataAdapter();
         observeDataChange();
-        newsViewModel.fetchRepo();
+        checkPermission();
+    }
+
+    private void checkPermission() {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                Toast.makeText(this, "Permission needed to use app", Toast.LENGTH_LONG).show();
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        PERMISSIONS_REQUEST_STORAGE);
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        PERMISSIONS_REQUEST_STORAGE);
+            }
+        } else {
+            newsViewModel.fetchRepo();
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_STORAGE: {
+
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    newsViewModel.fetchRepo();
+                } else {
+                    Toast.makeText(this, "Permission needed to use app", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            }
+
+        }
     }
 
     private void loadNewsData(List<User> data) {
@@ -81,8 +125,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements I
     @Override
     public void onItemClick(User user) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable("SELECTED_USER",user);
-        Intent intent = new Intent(this,DetailViewActivity.class);
+        bundle.putParcelable("SELECTED_USER", user);
+        Intent intent = new Intent(this, DetailViewActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
     }
