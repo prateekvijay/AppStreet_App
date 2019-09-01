@@ -29,16 +29,16 @@ import javax.inject.Inject;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> implements IItemClick<User> {
     private RepoAdapter repoAdapter;
-    private RepoViewModel newsViewModel;
+    private RepoViewModel repoViewModel;
 
     @Inject
-    RepoViewModelFactory newsViewModelFactory;
+    RepoViewModelFactory repoViewModelFactory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        newsViewModel = ViewModelProviders.of(this, newsViewModelFactory).get(RepoViewModel.class);
-        initNewsDataAdapter();
+        repoViewModel = ViewModelProviders.of(this, repoViewModelFactory).get(RepoViewModel.class);
+        initRepoDataAdapter();
         observeDataChange();
         checkPermission();
     }
@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements I
                         PERMISSIONS_REQUEST_STORAGE);
             }
         } else {
-            newsViewModel.fetchRepo();
+            repoViewModel.fetchRepo();
         }
     }
 
@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements I
 
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    newsViewModel.fetchRepo();
+                    repoViewModel.fetchRepo();
                 } else {
                     Toast.makeText(this, "Permission needed to use app", Toast.LENGTH_LONG).show();
                     finish();
@@ -82,8 +82,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements I
         }
     }
 
-    private void loadNewsData(List<User> data) {
-        repoAdapter.addNewsList(data);
+    private void loadRepoData(List<User> data) {
+        repoAdapter.addRepoList(data);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements I
         return R.layout.activity_main;
     }
 
-    private void initNewsDataAdapter() {
+    private void initRepoDataAdapter() {
         repoAdapter = new RepoAdapter(new ArrayList<>());
         binding.recyclerViewList.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerViewList.setAdapter(repoAdapter);
@@ -99,15 +99,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements I
     }
 
     private void observeDataChange() {
-        newsViewModel.getNewsListState().observe(this, newsListViewState -> {
-            switch (newsListViewState.getCurrentState()) {
+        repoViewModel.getRepoListState().observe(this, repoListViewState -> {
+            switch (repoListViewState.getCurrentState()) {
                 case 0:
                     binding.loadingView.setVisibility(View.VISIBLE);
                     binding.error.setVisibility(View.GONE);
                     binding.recyclerViewList.setVisibility(View.GONE);
                     break;
                 case 1:
-                    loadNewsData(newsListViewState.getData());
+                    loadRepoData(repoListViewState.getData());
                     binding.loadingView.setVisibility(View.GONE);
                     binding.error.setVisibility(View.GONE);
                     binding.recyclerViewList.setVisibility(View.VISIBLE);

@@ -19,9 +19,9 @@ public abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(RepoViewModel.class)
-    abstract ViewModel bindNewsViewModel(RepoViewModel searchViewModel);
+    abstract ViewModel bindRepoViewModel(RepoViewModel searchViewModel);
 
 
     @Binds
-    abstract ViewModelProvider.Factory bindNewsViewModelFactory(RepoViewModelFactory factory);
+    abstract ViewModelProvider.Factory bindRepoViewModelFactory(RepoViewModelFactory factory);
 }

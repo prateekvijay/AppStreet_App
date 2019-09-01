@@ -33,11 +33,11 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
         listener = null;
     }
 
-    public void addNewsList(List<User> newsList) {
+    public void addRepoList(List<User> repoList) {
         if (!this.users.isEmpty()) {
             this.users.clear();
         }
-        this.users.addAll(newsList);
+        this.users.addAll(repoList);
         notifyDataSetChanged();
     }
 

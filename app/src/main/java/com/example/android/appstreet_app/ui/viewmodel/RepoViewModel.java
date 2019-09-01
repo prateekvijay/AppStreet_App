@@ -20,10 +20,10 @@ public class RepoViewModel extends ViewModel {
     private CompositeDisposable disposable;
     private final RepoApiClient apiClient;
     private final RxSingleSchedulers rxSingleSchedulers;
-    private final MutableLiveData<RepoListViewState> newsListState = new MutableLiveData<>();
+    private final MutableLiveData<RepoListViewState> repoListState = new MutableLiveData<>();
 
-    public MutableLiveData<RepoListViewState> getNewsListState() {
-        return newsListState;
+    public MutableLiveData<RepoListViewState> getRepoListState() {
+        return repoListState;
     }
 
     @Inject
@@ -35,24 +35,24 @@ public class RepoViewModel extends ViewModel {
 
     public void fetchRepo() {
         disposable.add(apiClient.fetchRepo(AppConstants.LANGUAGE, AppConstants.DURATION)
-                .doOnEvent((newsList, throwable) -> onLoading())
+                .doOnEvent((repoList, throwable) -> onLoading())
                 .compose(rxSingleSchedulers.applySchedulers())
                 .subscribe(this::onSuccess,
                         this::onError));
     }
 
-    private void onSuccess(List<User> newsList) {
-        RepoListViewState.SUCCESS_STATE.setData(newsList);
-        newsListState.postValue(RepoListViewState.SUCCESS_STATE);
+    private void onSuccess(List<User> repoList) {
+        RepoListViewState.SUCCESS_STATE.setData(repoList);
+        repoListState.postValue(RepoListViewState.SUCCESS_STATE);
     }
 
     private void onError(Throwable error) {
         RepoListViewState.ERROR_STATE.setError(error);
-        newsListState.postValue(RepoListViewState.ERROR_STATE);
+        repoListState.postValue(RepoListViewState.ERROR_STATE);
     }
 
     private void onLoading() {
-        newsListState.postValue(RepoListViewState.LOADING_STATE);
+        repoListState.postValue(RepoListViewState.LOADING_STATE);
     }
 
     @Override
