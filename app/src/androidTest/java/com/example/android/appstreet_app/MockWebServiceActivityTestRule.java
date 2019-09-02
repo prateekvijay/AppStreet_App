@@ -10,9 +10,6 @@ import java.io.IOException;
 import okhttp3.mockwebserver.MockWebServer;
 
 
-/**
- * @author Ruwanka
- */
 public class MockWebServiceActivityTestRule<A extends Activity> extends ActivityTestRule<A> {
 
     public interface OnInitListener {

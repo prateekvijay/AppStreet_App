@@ -1,6 +1,8 @@
 package com.example.android.appstreet_app;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -8,7 +10,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
-
+@RunWith(JUnit4.class)
 public class APIAvailabilityTest {
 
     @Test public void testAvailability() throws Exception {
