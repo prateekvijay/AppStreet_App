@@ -3,7 +3,9 @@ package com.example.android.appstreet_app.api.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class User implements Parcelable {
+import com.example.android.appstreet_app.utils.EscapeObfuscation;
+
+public class User implements Parcelable, EscapeObfuscation {
 
 
     /**
@@ -70,7 +72,7 @@ public class User implements Parcelable {
         this.repo = repo;
     }
 
-    public static class RepoBean implements Parcelable {
+    public static class RepoBean implements Parcelable,EscapeObfuscation {
         /**
          * name : PhotoView
          * description : Implementation of ImageView for Android that supports zooming, by various touch gestures.
