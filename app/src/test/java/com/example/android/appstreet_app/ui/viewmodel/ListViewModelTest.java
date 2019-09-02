@@ -1,4 +1,4 @@
-package com.example.android.appstreet_app;
+package com.example.android.appstreet_app.ui.viewmodel;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.Lifecycle;

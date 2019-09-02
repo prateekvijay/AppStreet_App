@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.test.InstrumentationTestCase;
 
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
@@ -21,6 +22,10 @@ import org.junit.runner.RunWith;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
 public class MockApiTest extends InstrumentationTestCase {
@@ -54,6 +59,12 @@ public class MockApiTest extends InstrumentationTestCase {
 
         Intent intent = new Intent();
         mActivityRule.launchActivity(intent);
+        onView(withId(R.id.recyclerViewList)).perform(
+                RecyclerViewActions.actionOnItemAtPosition(0, MyViewAction.clickChildViewWithId(R.id.more_details)));
+
+
+        onView(withId(R.id.repolink_value))
+                .perform(click());
     }
 
     @After
